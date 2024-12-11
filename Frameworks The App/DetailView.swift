@@ -38,8 +38,15 @@ struct DetailView: View {
             Button {
                 print("pressed")
             } label: {
-                FrameworksButton(title: "Learn More")
-            }
+//                FrameworksButton(title: "Learn More")
+                Label("Learn More", systemImage: "book.fill")
+            }.buttonStyle(.bordered)
+                .padding()
+                .controlSize(.large)
+                .buttonBorderShape(.roundedRectangle(radius: 20))
+                .tint(.red)
+            
+            
 
             
         }
