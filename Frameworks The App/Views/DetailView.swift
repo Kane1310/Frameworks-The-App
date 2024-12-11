@@ -11,23 +11,13 @@ struct DetailView: View {
     
     var framework: Framework
     @Binding var isShowingDetailView: Bool
+    @State private var isShowingSafariView = false
     
     var body: some View {
         
         VStack(spacing: 8){
             
-            HStack{
-                Spacer()
-                Button {
-                    isShowingDetailView = false
-                } label: {
-                    Image(systemName: "xmark")
-                        .foregroundStyle(Color(.label))
-                        .imageScale(.large)
-                        .frame(width: 44, height: 44)
-                }
-            }.padding()
-           
+          XDissmissButton(isShowingDetailView: $isShowingDetailView)
 
             FrameworkTitleView(framework: framework)
                 .padding()
@@ -36,9 +26,12 @@ struct DetailView: View {
                 .padding()
             Spacer()
             Button {
-                print("pressed")
+               isShowingSafariView = true
             } label: {
                 FrameworksButton(title: "Learn More")
+            }
+            .sheet(isPresented: $isShowingSafariView){
+                SafariView(url: URL(string: framework.urlString) ?? URL(string: "www.apple.com")!)
             }
 
             
